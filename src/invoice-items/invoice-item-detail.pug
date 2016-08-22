@@ -1,0 +1,40 @@
+.invoice(*ngIf="item")
+  md-card
+    a([routerLink]="['/invoices/' + item.invoice_id + '/items/' + item.id]")
+      md-card-title
+        | Item # {{item.id}}
+    md-card-subtitle
+      | Invoice: # {{item.invoice_id}}
+    //- md-card-subtitle
+    //-   | Product: # {{item.product_id}}
+    md-divider
+    md-card-content
+      form
+        md-input(
+          placeholder="quantity"
+          '[(ngModel)]'="item.quantity"
+          '[ngModelOptions]'="{standalone: true}"
+          '(ngModelChange)'="save(item)"
+        )
+      form
+        select(
+          *ngIf="crud.products"
+          '[(ngModel)]'=`item.product_id`
+          '[ngModelOptions]'="{standalone: true}"
+          '(ngModelChange)'="item.product_id = 1*item.product_id; save(item)"
+        )
+          option(
+            *ngFor='let product of crud.products'
+            '[value]'='product.id'
+          )
+            | {{product.name}}
+    md-divider
+    md-card-content
+      //- p
+      //-   | Quantity: {{item.quantity}}
+      p
+        | Revenue: {{item.revenue}}
+    md-divider
+    md-card-actions
+      //- button(md-raised-button, color='accent', [routerLink]="['/invoices/' + item.invoice_id + '/items' + item.id + '/edit']") Edit
+      button(md-raised-button, color='warn', (click)="api.del(item.id, item.invoice_id)") Delete

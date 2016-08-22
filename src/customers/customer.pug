@@ -1,0 +1,10 @@
+customer-detail(*ngIf='customer', [customer]='customer')
+
+.invoices(*ngIf="invoices")
+  ul
+    li(*ngFor="let invoice of invoices")
+      invoice-detail([invoice]="invoice")
+  button(md-fab, (click)="api.new()")
+    md-icon add
+
+button(md-raised-button, color='accent', [routerLink]="['/customers']") Back

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+	  "target": "es6",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "listFiles": true,
+    "outDir": "public"
+  },
+  "angularCompilerOptions": {
+    "genDir": "./codegen"
+  },
+  "files": [
+    "./src/boot.ts"
+  ]
+}

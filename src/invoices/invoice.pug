@@ -1,0 +1,10 @@
+invoice-detail(*ngIf='invoice', [invoice]='invoice')
+
+.items(*ngIf="items")
+  ul
+    li(*ngFor="let item of items")
+      invoice-item-detail([item]="item")
+  button(md-fab, (click)="api.new()")
+    md-icon add
+
+button(md-raised-button, color='accent', [routerLink]="['/invoices']") Back

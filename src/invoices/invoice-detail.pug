@@ -1,0 +1,43 @@
+.invoice(*ngIf="invoice")
+  md-card
+    a([routerLink]="['/invoices/' + invoice.id]")
+      md-card-title
+        | Invoice # {{invoice.id}}
+    //- md-card-subtitle
+    //-   | Client: {{invoice.customer_id}}
+    md-divider
+    md-card-content
+      //- edit:
+      form
+        //- input('[(ngModel)]'="invoice.discount")
+        md-input(
+          type="number"
+          placeholder="discount"
+          '[(ngModel)]'="invoice.discount"
+          '[ngModelOptions]'="{standalone: true}"
+          '(ngModelChange)'="api.put(invoice)"
+        )
+          span(md-suffix) %&nbsp;
+      form
+        select(
+          *ngIf="crud.customers"
+          '[(ngModel)]'=`invoice.customer_id`
+          '[ngModelOptions]'="{standalone: true}"
+          '(ngModelChange)'="invoice.customer_id = 1*invoice.customer_id; api.put(invoice)"
+        )
+          option(
+            *ngFor='let customer of crud.customers'
+            '[value]'='customer.id'
+          )
+            | {{customer.name}}
+    md-divider
+    md-card-content
+      p
+        | Total: {{invoice.total}}
+    md-card-content(*ngFor="let item of invoice.items")
+      invoice-item-detail([item]="item")
+    md-divider
+    md-card-actions
+      button(md-raised-button, color='primary', (click)="addItem()") Add Item
+      //- button(md-raised-button, color='accent', [routerLink]="['/invoices/' + invoice.id + '/edit']") Edit
+      button(md-raised-button, color='warn', (click)="api.del(invoice.id)") Delete
