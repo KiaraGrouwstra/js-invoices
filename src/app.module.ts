@@ -11,7 +11,7 @@ import { MdButtonToggleModule } from '@angular2-material/button-toggle';
 import { MdCardModule } from '@angular2-material/card';
 import { MdCheckboxModule } from '@angular2-material/checkbox';
 import { MdGridListModule } from '@angular2-material/grid-list';
-import { MdIconModule } from '@angular2-material/icon';
+import { MdIconModule, MdIconRegistry } from '@angular2-material/icon';
 import { MdInputModule } from '@angular2-material/input';
 import { MdListModule } from '@angular2-material/list';
 import { MdMenuModule } from '@angular2-material/menu';
@@ -89,7 +89,7 @@ export const routing = RouterModule.forRoot(routes);
   imports: [
     // HttpModule,
     // FormsModule,
-    // ...MATERIAL,
+    MATERIAL,
 
     BrowserModule,
     SharedModule.forRoot(),
@@ -110,7 +110,7 @@ export const routing = RouterModule.forRoot(routes);
     InvoiceComp,
     InvoiceItemComp,
   ],
-  // providers: [],
+  providers: [ MdIconRegistry ],
   bootstrap: [App],
 })
 export class AppModule {}

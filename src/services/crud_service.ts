@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+
+import 'rxjs';
+
+
 let lodash = require('lodash');
 let _ = require('lodash/fp');
 
@@ -119,6 +123,7 @@ export class CrudService {
 
   fetch(method: string, url: string, obj: T) {
     console.log(method, url);
+    console.log('test', this.http[method](url, ['put','post'].includes(method) ? obj : undefined));
     return this.http[method](url, ['put','post'].includes(method) ? obj : undefined)
     .toPromise()
     .then(x => x.json() || [])
