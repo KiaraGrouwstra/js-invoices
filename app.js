@@ -264,7 +264,9 @@ app.route('/api/invoices/:invoice_id/items/:id')
   })
   .put(function(req, res) {
     InvoiceItem.findById(req.params.id).then(function(invoice_item) {
-      invoice_item.update(_.pick(req.body, ['product_id', 'quantity'])).then(function(invoice_item) {
+      var nDate = _.pick(req.body, ['product_id', '_quantity']);
+      nDate.quantity = nDate._quantity;
+      invoice_item.update(nDate).then(function(invoice_item) {
         res.json(invoice_item);
       });
     });
