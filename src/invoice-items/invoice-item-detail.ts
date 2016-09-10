@@ -20,7 +20,15 @@ export class InvoiceItemDetailComp {
 
   save(x): void {
     console.log('save', x);
-    x.revenue = x.quantity * (x.product ? x.product.price : 0)
+    var product;
+    ( x.product_id && x.product_id != ( x.product && x.product.id ) )
+    && (
+      product = this.crud.products.find( p=>p.id==x.product_id )
+    )
+    && (
+      x.product = product
+    );
+    // x.revenue = x.quantity * (x.product ? x.product.price : 0)
     if(x) this.api.put(x, x.invoice_id);
   }
 
