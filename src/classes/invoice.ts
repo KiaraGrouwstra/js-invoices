@@ -14,7 +14,7 @@ export class Invoice {
 
   set items(x: InvoiceItem[]) {
     this._items = x;
-    this.total = x.map(item => item.revenue).reduce((a,b) => a + b, 0) * (100 - this.discount);
+    this.total = x.map(item => item.revenue/1).reduce((a,b) => a + b, 0) * (100 - this.discount) / 100;
   }
   get items(): Product {
     return this._items;
