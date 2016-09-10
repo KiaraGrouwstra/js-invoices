@@ -30,7 +30,7 @@ export class InvoiceItem {
   }
 
   combine() {
-    this.revenue = this.quantity * (this.product ? this.product.price : 0);
+    this.revenue = ( this.quantity * (this.product ? this.product.price : 0) ).toFixed( 2 );
   }
 
   // set revenue(x: number) {
