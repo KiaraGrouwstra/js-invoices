@@ -45,8 +45,7 @@ export class CrudService {
     },
     item: {
       url: (id) => `/api/invoices/${id}/items`,
-      id_url: (inv_id, id) => `/api/invoices/${inv_id}/items/${id}`,
-      cls: InvoiceItem,
+      id_url: (id, inv_id) => `/api/invoices/${inv_id}/items/${id}`, cls: InvoiceItem,
       fact: makeInvoiceItem,
     },
   }, (v, k) => {
@@ -100,6 +99,47 @@ export class CrudService {
   ) {
     window['router'] = router;
     window['crud'] = this;
+    Promise.all( [
+      this.sub.customer.index()
+      ,this.sub.product.index()
+      ,this.sub.invoice.index()
+    ] ).then(
+      ( res ) => {
+        var [ customers, products, invoices ] = res;
+        this.customers = customers.map( makeCustomer );
+        this.products = products.map( makeProduct );
+        return Promise.all(
+          [ Promise.resolve( invoices ) ]
+          .concat(
+            invoices.map( (iv)=>this.sub.item.index(iv.id) )
+          )
+        );
+      }
+    ).then(
+      ( res ) => {
+        var [ invoices, ...items ] = res;
+        items = items[0].map( makeInvoiceItem );
+        // 关联 Product 到 item
+        for( var i in items ) {
+          items[i].product = this.products.find(
+                        (p)=>p.id==items[i].product_id
+                      ); 
+        }
+        // 关联 Item 到 Invoice
+        for( var i in invoices ) {
+          invoices[i].items = items.filter(
+                              (item)=>item.invoice_id==invoices[i].id
+                            );
+        }
+        // 关联 Customer 到 invoice
+        for( var i in invoices ) {
+          invoices[i].customer = this.customers.find(
+                                    (c)=>c.id==invoices[i].customer_id );
+        }
+        this.invoices = invoices.map( makeInvoice );
+      }
+    ).then( console.warn.bind( console, 'crud_service finish init;' ) );
+    /*/
     this.sub.customer.populate();
     this.sub.product.populate();
     this.sub.invoice.index()

@@ -19,6 +19,18 @@ export class InvoiceComp {
   ) {}
 
   ngOnInit() {
+    this.route.params.subscribe(
+      ( params ) => {
+        var id = params['id'] / 1;
+        this.invoice = this.crud.invoices.find(
+                        (i)=>i.id == id
+                        );
+        this.items = this.invoice.items;
+      }
+    );
+  }
+
+  _ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       let id = +params['id'];
       this.api.get(id)
