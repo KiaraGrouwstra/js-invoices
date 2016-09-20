@@ -25,7 +25,7 @@ module.exports = {
 			{ test: /\.ts$/, loader: 'ts' },
 			{ test: /\.html$/, loader: 'html' },
 			{ test: /\.json$/, loader: 'json' },
-			{ test: /\.pug$/, loader: 'pug-html' },
+			{ test: /\.pug$/, loader: 'pug-ng-html' },
 			{ test: /\.less$/, loader: 'style!css!less' },
 			{ test: /\.css$/, loader: 'style!css' },
 			{ test: /\.(jpe?g|png|gif|ttf|eot|svg|woff(2)?|wav|mp3)$/, loader: 'file' }

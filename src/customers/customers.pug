@@ -1,5 +1,5 @@
 ul(*ngIf="crud.customers")
   li(*ngFor="let customer of crud.customers")
     customer-detail([customer]="customer")
-button(md-fab, (click)="api.new()")
+button(md-fab (click)="api.new()")
   md-icon add

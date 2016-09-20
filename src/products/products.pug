@@ -1,5 +1,5 @@
 ul(*ngIf="crud.products")
   li(*ngFor="let product of crud.products")
     product-detail([product]="product")
-button(md-fab, (click)="api.new()")
+button(md-fab (click)="api.new()")
   md-icon add

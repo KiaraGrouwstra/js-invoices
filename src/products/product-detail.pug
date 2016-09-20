@@ -28,5 +28,5 @@
     //-     | # {{product.id}}
     md-divider
     md-card-actions
-      //- button(md-raised-button, color='accent', [routerLink]="['/products/' + product.id + '/edit']") Edit
-      button(md-raised-button, color='warn', (click)="api.del(product.id)") Delete
+      //- button(md-raised-button color='accent' [routerLink]="['/products/' + product.id + '/edit']") Edit
+      button(md-raised-button color='warn' (click)="api.del(product.id)") Delete

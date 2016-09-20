@@ -1,5 +1,5 @@
 ul(*ngIf="items")
   li(*ngFor="let item of items")
     invoice-item-detail([item]="item")
-button(md-fab, (click)="api.new()")
+button(md-fab (click)="api.new()")
   md-icon add

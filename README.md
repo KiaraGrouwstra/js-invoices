@@ -21,6 +21,9 @@
 ###### Viewing the application in your browser
 `http://localhost:8000`
 
+###### Watch changes
+`webpack --watch`
+
 # Schema
 
 ## Customers
