@@ -12,14 +12,14 @@
           placeholder="name"
           '[(ngModel)]'="product.name"
           '[ngModelOptions]'="{standalone: true}"
-          '(ngModelChange)'="api.put(product)"
+          '(ngModelChange)'="product_update($event)"
         )
         md-input(
           type="number"
           placeholder="price"
           '[(ngModel)]'="product.price"
           '[ngModelOptions]'="{standalone: true}"
-          '(ngModelChange)'="api.put(product)"
+          '(ngModelChange)'="product_update($event)"
         )
           span(md-prefix) $&nbsp;
     //- md-divider
@@ -29,4 +29,4 @@
     md-divider
     md-card-actions
       //- button(md-raised-button, color='accent', [routerLink]="['/products/' + product.id + '/edit']") Edit
-      button(md-raised-button, color='warn', (click)="api.del(product.id)") Delete
+      button(md-raised-button, color='warn', (click)="product_remove($event)") Delete
