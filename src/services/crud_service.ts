@@ -7,8 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs';
 
 
-let lodash = require('lodash');
-let _ = require('lodash/fp');
+let R = require('ramda');
 
 function handleError (error: any) {
   let errMsg = (error.message) ? error.message : error.status ?
@@ -24,31 +23,8 @@ export class CrudService {
   invoices = [];
   items = [];
 
-  sub = lodash.mapValues({
-    customer: {
-      url: () => '/api/customers',
-      id_url: (id) => `/api/customers/${id}`,
-      cls: Customer,
-      fact: makeCustomer,
-    },
-    product: {
-      url: () => '/api/products',
-      id_url: (id) => `/api/products/${id}`,
-      cls: Product,
-      fact: makeProduct,
-    },
-    invoice: {
-      url: () => '/api/invoices',
-      id_url: (id) => `/api/invoices/${id}`,
-      cls: Invoice,
-      fact: makeInvoice,
-    },
-    item: {
-      url: (id) => `/api/invoices/${id}/items`,
-      id_url: (id, inv_id) => `/api/invoices/${inv_id}/items/${id}`, cls: InvoiceItem,
-      fact: makeInvoiceItem,
-    },
-  }, (v, k) => {
+  sub = R.mapObjIndexed(
+    (v, k) => {
     let plural = k+'s';
     let route = '/'+plural;
     let { url, id_url, cls, fact } = v;
@@ -56,7 +32,7 @@ export class CrudService {
     let put = (obj, id) => this.fetch('put', id_url(obj.id, id), obj);
     let post = (obj, id) => this.fetch('post', url(id), obj)
     .then(x => {
-      let merged = fact(_.assign(obj, x));
+      let merged = fact(R.merge(obj, x));
       // console.log('posted', x, obj, merged);
       this[plural] = this[plural].concat(merged);
       put(merged, id);
@@ -91,6 +67,31 @@ export class CrudService {
         this[plural] = x.map(fact);
       }),
     };
+  },
+  {
+    customer: {
+      url: () => '/api/customers',
+      id_url: (id) => `/api/customers/${id}`,
+      cls: Customer,
+      fact: makeCustomer,
+    },
+    product: {
+      url: () => '/api/products',
+      id_url: (id) => `/api/products/${id}`,
+      cls: Product,
+      fact: makeProduct,
+    },
+    invoice: {
+      url: () => '/api/invoices',
+      id_url: (id) => `/api/invoices/${id}`,
+      cls: Invoice,
+      fact: makeInvoice,
+    },
+    item: {
+      url: (id) => `/api/invoices/${id}/items`,
+      id_url: (id, inv_id) => `/api/invoices/${inv_id}/items/${id}`, cls: InvoiceItem,
+      fact: makeInvoiceItem,
+    },
   });
 
   constructor (
