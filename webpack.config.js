@@ -22,7 +22,7 @@ module.exports = {
   // devtool: 'source-map',
 	module: {
 		loaders: [
-			{ test: /\.ts$/, loader: 'ts' },
+			{ test: /\.ts$/, loader: 'awesome-typescript' },  //‘ts’
 			{ test: /\.html$/, loader: 'html' },
 			{ test: /\.json$/, loader: 'json' },
 			{ test: /\.pug$/, loader: 'pug-html' },
@@ -33,10 +33,10 @@ module.exports = {
 	},
 	resolve: {
 		extensions: [ // you can now require('file') instead of require('file.coffee')
-			'', '.js', '.ts', '.json', '.pug', '.css', '.less', '.sass', '.scss', '.html'
+			'.js', '.ts', '.json', '.pug', '.css', '.less', '.sass', '.scss', '.html'
 		],
-		modulesDirectories: ['node_modules', 'src'],
-		root: __dirname
+		// modulesDirectories: ['node_modules', 'src'],
+		// root: __dirname
 	},
 	node: {
 		fs: 'empty',
