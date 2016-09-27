@@ -58,7 +58,7 @@ import {
 //   // invoicesServiceProvider,
 } from './services';
 // import { CONFIG, APP_CONFIG } from './config';
-// import { Pipe } from './pipes';
+import { PIPE_PROVIDERS } from './lib/pipes';
 // import { Directive } from './directives';
 
 @NgModule({
@@ -68,7 +68,7 @@ import {
     HttpModule,
   ],
   declarations: [
-    // Pipes:
+    Pipes: [PIPE_PROVIDERS],
     // Directives:
   ],
   providers: [
