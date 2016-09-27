@@ -118,7 +118,7 @@ export class CrudService {
     ).then(
       ( res ) => {
         var [ invoices, ...items ] = res;
-        items = items[0].map( makeInvoiceItem );
+        items = ( items[0] || [] ).map( makeInvoiceItem );
         // 关联 Product 到 item
         for( var i in items ) {
           items[i].product = this.products.find(
