@@ -160,6 +160,7 @@ export class CrudService {
       });
     });
   }
+  //*/
 
   fetch(method: string, url: string, obj: T) {
     console.log(method, url);
