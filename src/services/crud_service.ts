@@ -139,7 +139,8 @@ export class CrudService {
         this.invoices = invoices.map( makeInvoice );
       }
     ).then( console.warn.bind( console, 'crud_service finish init;' ) );
-    /*/
+
+    /*
     this.sub.customer.populate();
     this.sub.product.populate();
     this.sub.invoice.index()
@@ -159,8 +160,8 @@ export class CrudService {
         return makeInvoice(invoice);
       });
     });
+    */
   }
-  //*/
 
   fetch(method: string, url: string, obj: T) {
     console.log(method, url);
