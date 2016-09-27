@@ -118,7 +118,7 @@ export class CrudService {
     ).then(
       ( res ) => {
         var [ invoices, ...items ] = res;
-        items = items[0].map( makeInvoiceItem );
+        items = ( items[0] || [] ).map( makeInvoiceItem );
         // 关联 Product 到 item
         for( var i in items ) {
           items[i].product = this.products.find(
@@ -139,7 +139,8 @@ export class CrudService {
         this.invoices = invoices.map( makeInvoice );
       }
     ).then( console.warn.bind( console, 'crud_service finish init;' ) );
-    /*/
+
+    /*
     this.sub.customer.populate();
     this.sub.product.populate();
     this.sub.invoice.index()
@@ -159,6 +160,7 @@ export class CrudService {
         return makeInvoice(invoice);
       });
     });
+    */
   }
 
   fetch(method: string, url: string, obj: T) {
