@@ -85,6 +85,12 @@ export const routes: Routes = [
 // ./app/app.routing.ts
 export const routing = RouterModule.forRoot(routes);
 
+import { provideStore } from '@ngrx/store';
+import reducers from './reducers';
+import actions from './actions';
+import { EffectsModule } from '@ngrx/effects';
+import ProductEffects from './effects/product';
+
 @NgModule({
   imports: [
     // HttpModule,
@@ -94,6 +100,7 @@ export const routing = RouterModule.forRoot(routes);
     BrowserModule,
     SharedModule.forRoot(),
     routing,
+    EffectsModule.run( ProductEffects )
   ],
   declarations: [
     App,
@@ -110,7 +117,7 @@ export const routing = RouterModule.forRoot(routes);
     InvoiceComp,
     InvoiceItemComp,
   ],
-  providers: [ MdIconRegistry ],
+  providers: [ MdIconRegistry, provideStore(reducers), ...actions ],
   bootstrap: [App],
 })
 export class AppModule {}
