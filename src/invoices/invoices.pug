@@ -1,5 +1,5 @@
-ul(*ngIf="crud.invoices")
-  li(*ngFor="let invoice of crud.invoices")
+ul(*ngIf="invoices | async")
+  li(*ngFor="let invoice of invoices | async")
     invoice-detail([invoice]="invoice")
-button(md-fab, (click)="api.new()")
+button(md-fab, (click)="create($event)")
   md-icon add

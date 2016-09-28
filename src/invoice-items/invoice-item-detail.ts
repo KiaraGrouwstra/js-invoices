@@ -3,6 +3,9 @@ import { Component, Input } from '@angular/core';
 import { CrudService } from '../services/crud_service';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { Store } from '@ngrx/store';
+import InvoiceActionCreator from '../actions/invoice';
+
 @Component({
   selector: 'invoice-item-detail',
   template: require('./invoice-item-detail.pug'),
@@ -10,26 +13,26 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class InvoiceItemDetailComp {
   @Input item: MyApp.InvoiceItem;
-  api = this.crud.sub.item;
+  //api = this.crud.sub.item;
+
+  products;
 
   constructor (
-    private crud: CrudService,
+    //private crud: CrudService,
     // public router: Router,
     // private route: ActivatedRoute,
-  ) {}
+    private store: Store,
+    private action: InvoiceActionCreator
+  ) {
+    this.products = store.select('products');
+  }
 
-  save(x): void {
-    console.log('save', x);
-    var product;
-    ( x.product_id && x.product_id != ( x.product && x.product.id ) )
-    && (
-      product = this.crud.products.find( p=>p.id==x.product_id )
-    )
-    && (
-      x.product = product
-    );
-    // x.revenue = x.quantity * (x.product ? x.product.price : 0)
-    if(x) this.api.put(x, x.invoice_id);
+  update( evt ) {
+    this.store.dispatch( this.action.update_item( this.item ) );
+  }
+
+  remove( evt ) {
+    this.store.dispatch( this.action.remove_item( this.item ) );
   }
 
 }

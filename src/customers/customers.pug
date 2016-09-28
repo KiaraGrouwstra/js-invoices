@@ -1,5 +1,5 @@
-ul(*ngIf="crud.customers")
-  li(*ngFor="let customer of crud.customers")
+ul(*ngIf="customers | async")
+  li(*ngFor="let customer of customers | async")
     customer-detail([customer]="customer")
-button(md-fab, (click)="api.new()")
+button(md-fab, (click)="create($event)")
   md-icon add

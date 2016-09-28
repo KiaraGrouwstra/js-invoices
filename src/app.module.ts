@@ -89,7 +89,7 @@ import { provideStore } from '@ngrx/store';
 import reducers from './reducers';
 import actions from './actions';
 import { EffectsModule } from '@ngrx/effects';
-import ProductEffects from './effects/product';
+import effects from './effects';
 
 @NgModule({
   imports: [
@@ -100,7 +100,7 @@ import ProductEffects from './effects/product';
     BrowserModule,
     SharedModule.forRoot(),
     routing,
-    EffectsModule.run( ProductEffects )
+    ...effects.map( EffectsModule.run )
   ],
   declarations: [
     App,

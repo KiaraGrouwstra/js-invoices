@@ -17,21 +17,21 @@
           placeholder="name"
           '[(ngModel)]'="customer.name"
           '[ngModelOptions]'="{standalone: true}"
-          '(ngModelChange)'="api.put(customer)"
+          '(ngModelChange)'="update($evevt)"
         )
         md-input(
           placeholder="phone"
           '[(ngModel)]'="customer.phone"
           '[ngModelOptions]'="{standalone: true}"
-          '(ngModelChange)'="api.put(customer)"
+          '(ngModelChange)'="update($event)"
         )
         md-input(
           placeholder="address"
           '[(ngModel)]'="customer.address"
           '[ngModelOptions]'="{standalone: true}"
-          '(ngModelChange)'="api.put(customer)"
+          '(ngModelChange)'="update($event)"
         )
     md-divider
     md-card-actions
       //- button(md-raised-button, color='accent', [routerLink]="['/customers/' + customer.id + '/edit']") Edit
-      button(md-raised-button, color='warn', (click)="api.del(customer.id)") Delete
+      button(md-raised-button, color='warn', (click)="remove($event)") Delete
