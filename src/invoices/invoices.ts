@@ -27,13 +27,34 @@ export class InvoicesComp {
                     .flatMap(
                       ( invoices ) => {
                         invoices = invoices || [];
-                        return store.select('invoice_items').map(
+                        return store.select('invoice_items').flatMap(
                           ( items ) => {
                             items = items || [];
-                            return invoices.map(
-                              ( invoice ) => {
-                                invoice.items = items.filter( (it)=>it.invoice_id==invoice.id );
-                                return invoice;
+                            return store.select('products').map(
+                              ( products ) => {
+                                products = products || [];
+
+                                items = items.map(
+                                  ( it ) => {
+                                    var p = products.find( (p)=>p.id==it.product_id );
+                                    it.revenue = p ? ( p.price * it.quantity ).toFixed(2) / 1 : 0;
+                                    return it;
+                                  }
+                                );
+
+                                return invoices.map(
+                                  ( invoice ) => {
+                                    invoice.items = items.filter( (it)=>it.invoice_id==invoice.id );
+                                    invoice.total = invoice.items.reduce(
+                                      ( a, b ) => {
+                                        return { revenue: a.revenue + b.revenue };
+                                      }
+                                      ,{ revenue: 0 }
+                                    ).revenue * ( 1 - invoice.discount / 100 );
+                                    return invoice;
+                                  }
+                                );
+                                
                               }
                             );
                           }
