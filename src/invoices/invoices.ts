@@ -22,45 +22,40 @@ export class InvoicesComp {
     private store: Store,
     private action: InvoiceActionCreator
   ) {
+    var prop = ( x ) => ( ctx ) => ctx[x];
     // 关联 invoice_item 到 invoice;
-    this.invoices = store.select('invoices')
-                    .flatMap(
-                      ( invoices ) => {
-                        invoices = invoices || [];
-                        return store.select('invoice_items').flatMap(
-                          ( items ) => {
-                            items = items || [];
-                            return store.select('products').map(
-                              ( products ) => {
-                                products = products || [];
+    this.invoices = Rx.Observable.combineLatest(
+                      store.map( prop('invoices') )
+                      ,store.map( prop('invoice_items') )
+                      ,store.map( prop('products') )
+                      ,( invoices, invoice_items, products ) => [ invoices||[], invoice_items||[], products||[] ]
+                    ).map(
+                      ( res ) => {
 
-                                items = items.map(
-                                  ( it ) => {
-                                    var p = products.find( (p)=>p.id==it.product_id );
-                                    it.revenue = p ? ( p.price * it.quantity ).toFixed(2) / 1 : 0;
-                                    return it;
-                                  }
-                                );
+                        let [ invoices, items, products ] = res;
 
-                                return invoices.map(
-                                  ( invoice ) => {
-                                    invoice.items = items.filter( (it)=>it.invoice_id==invoice.id );
-                                    invoice.total = invoice.items.reduce(
-                                      ( a, b ) => {
-                                        return { revenue: a.revenue + b.revenue };
-                                      }
-                                      ,{ revenue: 0 }
-                                    ).revenue * ( 1 - invoice.discount / 100 );
-                                    return invoice;
-                                  }
-                                );
-                                
-                              }
-                            );
-                          }
-                        );
+                        items = items.map( (it) => {
+                          var p = products.find( (p)=>p.id == it.product_id );
+                          it.revenue = p ? (p.price * it.quantity).toFixed(2) / 1 : 0;
+                          return it;
+                        } );
+
+                        invoices = invoices.map( (invoice) => {
+                          invoice.items = items.filter( (it)=>it.invoice_id == invoice.id );
+                          invoice.total = invoice.items.reduce(
+                            ( a, b ) => {
+                              return { revenue: a.revenue + b.revenue };
+                            }
+                            ,{ revenue: 0 }
+                          ).revenue * ( 1 - invoice.discount / 100 );
+                          return invoice;
+                        } );
+
+                        return invoices;
+
                       }
                     );
+
   }
 
   ngOnInit() {

@@ -50,6 +50,12 @@ var invoiceTable = {
     ,[ iac.REMOVE_ITEM_RESULT ]: ( state, action ) => {
         return { invoice_items: (state.invoice_items || []).filter( (i)=>i.id!=action.payload.id ) };
     }
+    ,[ iac.UPDATE_ITEM_RESULT + '-' ]: ( state, action ) => {
+        var items = state.invoice_items || [];
+        var idx = items.findIndex( (i)=>i.id == action.payload.id );
+        idx > -1 && items.splice( idx, 1, action.payload );
+        return { invoice_items: items };
+    }
 };
 
 export default function( state, action: Action ) {
