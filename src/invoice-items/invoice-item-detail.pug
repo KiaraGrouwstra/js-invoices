@@ -14,17 +14,17 @@
           placeholder="quantity"
           '[(ngModel)]'="item.quantity"
           '[ngModelOptions]'="{standalone: true}"
-          '(ngModelChange)'="save(item)"
+          '(ngModelChange)'="update($event)"
         )
       form
         select(
-          *ngIf="crud.products"
+          *ngIf="products | async"
           '[(ngModel)]'=`item.product_id`
           '[ngModelOptions]'="{standalone: true}"
-          '(ngModelChange)'="item.product_id = 1*item.product_id; save(item)"
+          '(ngModelChange)'="update($event)"
         )
           option(
-            *ngFor='let product of crud.products'
+            *ngFor='let product of products | async'
             '[value]'='product.id'
           )
             | {{product.name}}
@@ -37,4 +37,4 @@
     md-divider
     md-card-actions
       //- button(md-raised-button, color='accent', [routerLink]="['/invoices/' + item.invoice_id + '/items' + item.id + '/edit']") Edit
-      button(md-raised-button, color='warn', (click)="api.del(item.id, item.invoice_id)") Delete
+      button(md-raised-button, color='warn', (click)="remove($event)") Delete

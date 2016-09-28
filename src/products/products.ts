@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 import ProductActionCreator from '../actions/product';
-import Product from '../classes/product';
 
 @Component({
   selector: 'products',

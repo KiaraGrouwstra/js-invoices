@@ -15,18 +15,18 @@
           placeholder="discount"
           '[(ngModel)]'="invoice.discount"
           '[ngModelOptions]'="{standalone: true}"
-          '(ngModelChange)'="api.put(invoice)"
+          '(ngModelChange)'="update($event)"
         )
           span(md-suffix) %&nbsp;
       form
         select(
-          *ngIf="crud.customers"
+          *ngIf="customers | async"
           '[(ngModel)]'=`invoice.customer_id`
           '[ngModelOptions]'="{standalone: true}"
-          '(ngModelChange)'="invoice.customer_id = 1*invoice.customer_id; api.put(invoice)"
+          '(ngModelChange)'="update($event)"
         )
           option(
-            *ngFor='let customer of crud.customers'
+            *ngFor='let customer of customers | async'
             '[value]'='customer.id'
           )
             | {{customer.name}}
@@ -38,6 +38,6 @@
       invoice-item-detail([item]="item")
     md-divider
     md-card-actions
-      button(md-raised-button, color='primary', (click)="addItem()") Add Item
+      button(md-raised-button, color='primary', (click)="create_item($event)") Add Item
       //- button(md-raised-button, color='accent', [routerLink]="['/invoices/' + invoice.id + '/edit']") Edit
-      button(md-raised-button, color='warn', (click)="api.del(invoice.id)") Delete
+      button(md-raised-button, color='warn', (click)="remove($event)") Delete
