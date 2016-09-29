@@ -7,6 +7,8 @@ import CustomerActionCreator from '../actions/customer';
 
 @Injectable()
 export default class ProductEffects {
+
+    @Effect() detail$;
     
     @Effect() search$;
 
@@ -24,6 +26,11 @@ export default class ProductEffects {
         var toJson = ( res ) => res.json();
 
         var toReq = ( method ) => ( act) => this.http[method](['', 'api', 'customers', act.payload.id].join('/'), act.payload);
+
+        this.detail$ = actions$.ofType( CustomerActionCreator.DETAIL )
+                        .flatMap( toReq('get'))
+                        .map( toJson )
+                        .map( customerAction.detail_result );
 
         this.search$ = actions$.ofType( CustomerActionCreator.SEARCH )
                         .flatMap( () => this.http.get('/api/customers') )

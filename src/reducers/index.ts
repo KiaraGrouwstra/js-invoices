@@ -20,7 +20,10 @@ var productTable = {
 };
 
 var customerTable = {
-    [ cac.SEARCH_RESULT ]: ( state, action ) => {
+    [ cac.DETAIL_RESULT ]: ( state, action ) => {
+        return { customer_detail: action.payload };
+    }
+    ,[ cac.SEARCH_RESULT ]: ( state, action ) => {
         return { customers: action.payload };
     }
     ,[ cac.CREATE_RESULT ]: ( state, action ) => {

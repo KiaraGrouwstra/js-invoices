@@ -18,6 +18,13 @@ export default class CustomerActionCreator {
     static SEARCH = toActionType('search');
     static SEARCH_RESULT = toActionType('search_result');
 
+    static DETAIL = toActionType('detail');
+    static GET_RESULT = toActionType('detail_result');
+
+
+    detail;
+    detail_result;
+
     create;
     create_result;
 
@@ -32,6 +39,7 @@ export default class CustomerActionCreator {
 
     constructor() {
         [
+            'detail',
             'create',
             'update',
             'remove',

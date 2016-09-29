@@ -68,7 +68,7 @@ import { PIPE_PROVIDERS } from './lib/pipes';
     HttpModule,
   ],
   declarations: [
-    Pipes: [PIPE_PROVIDERS],
+    //Pipes: [PIPE_PROVIDERS],
     // Directives:
   ],
   providers: [
