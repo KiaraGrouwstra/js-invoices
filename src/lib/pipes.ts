@@ -16,6 +16,7 @@ export let PIPE_PROVIDERS = R.map(({ meta, pipes }) => R.pipe(R.toPairs, ([k,v])
   { meta: {}, pipes: {
     // *ngFor='let kv of obj | toKv' -> kv.k, kv.v
     toKv: R.pipe(R.toPairs, R.map(([k,v]) => ({ k, v }))),
+    i18n: (s) => s, // TODO: implement locale-based translation, pass `arguments`
   }},
   // { meta: { pure: false }, pipes: {}},
 ]);
