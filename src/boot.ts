@@ -3,6 +3,10 @@
 require('normalize.css/normalize');
 // import 'angular2/bundles/angular2-polyfills.js';
 
+import 'reflect-metadata';
+
+import 'zone.js';
+
 // JIT
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app.module';

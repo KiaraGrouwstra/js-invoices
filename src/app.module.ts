@@ -49,6 +49,13 @@ const MATERIAL = [
   // MdDialogModule,
 ];
 
+//i18n
+
+import { TranslateModule } from 'ng2-translate';
+//
+// console.log(TranslateModule);
+// console.log(Object.keys(TranslateModule));
+
 // App
 
 import { NgModule } from '@angular/core';
@@ -94,6 +101,7 @@ import effects from './effects';
 @NgModule({
   imports: [
     // HttpModule,
+    TranslateModule.forRoot(),
     // FormsModule,
     MATERIAL,
 
@@ -102,6 +110,7 @@ import effects from './effects';
     routing,
     ...effects.map( EffectsModule.run )
   ],
+
   declarations: [
     App,
     CustomerDetailComp,
@@ -120,4 +129,5 @@ import effects from './effects';
   providers: [ MdIconRegistry, provideStore(reducers), ...actions ],
   bootstrap: [App],
 })
+
 export class AppModule {}

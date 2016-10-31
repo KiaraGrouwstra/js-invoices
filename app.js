@@ -76,6 +76,7 @@ InvoiceItem = sequelize.define('invoice_items', {
   }
 });
 
+/*/
 sequelize.sync().then(function() {
   Customer.create({
     name: "Mark Benson",
@@ -123,6 +124,9 @@ sequelize.sync().then(function() {
 }).catch(function(e) {
   console.log("ERROR SYNCING WITH DB", e);
 });
+//*/
+
+var defaultToOption = ( params ) => params && Object.assign( {limit:10, offset:0}, params );
 
 var app = module.exports = express();
 app.set('port', process.env.PORT || 7000);
@@ -134,7 +138,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.route('/api/customers')
   .get(function(req, res) {
-    Customer.findAll().then(function(customers) {
+    Customer.findAll(defaultToOption(req.query)).then(function(customers) {
       res.json(customers);
     })
   })
@@ -170,7 +174,7 @@ app.route('/api/customers/:customer_id')
 
 app.route('/api/products')
   .get(function(req, res) {
-    Product.findAll().then(function(products) {
+    Product.findAll(defaultToOption(req.query)).then(function(products) {
       res.json(products);
     })
   })
@@ -207,7 +211,7 @@ app.route('/api/products/:product_id')
 
 app.route('/api/invoices')
   .get(function(req, res) {
-    Invoice.findAll().then(function(invoices) {
+    Invoice.findAll(defaultToOption(req.query)).then(function(invoices) {
       res.json(invoices);
     })
   })
@@ -239,8 +243,32 @@ app.route('/api/invoices/:invoice_id')
     });
   });
 
+// INVOICE ITEMS
+app.route('/api/items/')
+  .get( function(req, res) {
+    InvoiceItem.findAll(defaultToOption(req.query)).then( res.json.bind(res) );
+  })
+  .post( function(req, res) {
+    var invoice_item = InvoiceItem.build( _.pick(req.body, ['invoice_id', 'product_id', 'quantity']) );
+    invoice_item.save().then( res.json.bind(res) );
+  });
+app.route('/api/items/:item_id')
+  .get( function(req, res) {
+    InvoiceItem.findById(req.params.item_id).then( res.json.bind(res) );
+  } )
+  .put( function(req, res) {
+    InvoiceItem.findById(req.params.item_id).then( function( item ) {
+      item.update( _.pick(req.body, ['invoice_id','product_id','quantity']) ).then( res.json.bind(res) );
+    } );
+  } )
+  .delete( function(req, res) {
+    InvoiceItem.findById(req.params.item_id).then( function( item ) {
+      item.destroy().then( res.json.bind(res) );
+    } );
+  } );
 
-// INVOICE ITEMS API
+
+// INVOICE ITEMS API 带 item 关联的
 
 app.route('/api/invoices/:invoice_id/items')
   .get(function(req, res) {

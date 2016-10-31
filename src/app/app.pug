@@ -1,13 +1,15 @@
 md-toolbar([color]="primary")
   span
-    | Invoice App
+    | {{"Invoice App" | translate }}
     | &nbsp;
   button(md-button [routerLink]="['./products']")
-    | Products
+    | {{"Products" | translate }}
   button(md-button [routerLink]="['./customers']")
-    | Customers
+    | {{"Customers" | translate }}
   button(md-button [routerLink]="['./invoices']")
-    | Invoices
+    | {{"Invoices" | translate }}
+  span
+    | {{Hello | translate}}
 
 .content
   router-outlet

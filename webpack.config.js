@@ -18,7 +18,7 @@ module.exports = {
 		path: path.join(__dirname, 'public'),
 		filename: '[name].js'
 	},
-  devtool: 'eval',
+  // devtool: 'eval',
   // devtool: 'source-map',
 	module: {
 		loaders: [
