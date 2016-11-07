@@ -14,19 +14,19 @@
     md-card-content
       form
         md-input(
-          placeholder="name"
+          placeholder="{{'name' | translate }}"
           '[(ngModel)]'="customer.name"
           '[ngModelOptions]'="{standalone: true}"
           '(ngModelChange)'="update($evevt)"
         )
         md-input(
-          placeholder="phone"
+          placeholder="{{'phone' | translate }}"
           '[(ngModel)]'="customer.phone"
           '[ngModelOptions]'="{standalone: true}"
           '(ngModelChange)'="update($event)"
         )
         md-input(
-          placeholder="address"
+          placeholder="{{'address' | translate }}"
           '[(ngModel)]'="customer.address"
           '[ngModelOptions]'="{standalone: true}"
           '(ngModelChange)'="update($event)"
@@ -34,4 +34,4 @@
     md-divider
     md-card-actions
       //- button(md-raised-button, color='accent', [routerLink]="['/customers/' + customer.id + '/edit']") Edit
-      button(md-raised-button, color='warn', (click)="remove($event)") Delete
+      button(md-raised-button, color='warn', (click)="remove($event)") {{"Delete" | translate }}

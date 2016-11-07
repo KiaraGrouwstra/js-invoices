@@ -1,8 +1,25 @@
 export let Cn = {
       "Hello":"你好",
-      "Invoice App":"发票应用"，
+      "Invoice App":"发票应用",
       "Products":"产品",
       "Customers":"客户",
       "Invoices":"发票",
+      "Delete":"删除",
+      "Add Item":"添加商品",
+      "Add Customers":"添加客户",
+      "price":"价格",
+      "name":"姓名",
+      "phone":"电话",
+      "address":"地址",
+      "discount":"折扣",
+      "Total":"总计",
+      "Invoice":"发票",
+      "quantity":"数量",
+      "Revenue":"税收",
+      "Back":"返回",
+      "add":"添加",
+      "Item":"商品",
+      "Cancel":"取消",
+      "Confirm":"确定",
 
 };

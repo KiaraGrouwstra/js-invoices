@@ -5,18 +5,33 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 import InvoiceActionCreator from '../actions/invoice';
+import { MdDialogRef,MdDialog,MdDialogConfig } from '@angular/material';
+import { ViewContainerRef } from '@angular/core';
+import { AddDialog } from './invoice-customer-card';
 
 @Component({
+  styles: [
+    '.dialog{display:flex;}',
+    '[md-mini-fab]{display:flex;width:24px;height:24px;margin-left:10px;}',
+    '.md-18{padding:0;}'
+  ]
   selector: 'invoice-detail',
   template: require('./invoice-detail.pug'),
   inputs: ['invoice'],
 })
 export class InvoiceDetailComp {
+  dialogRef:MdDialogRef<AddDialog>
+
   @Input invoice: MyApp.Invoice;
+
+  products;
+
   customers;
   //api = this.crud.sub.invoice;
 
   constructor (
+    public dialog :MdDialog,
+    public viewContainerRef: ViewContainerRef,
     //private crud: CrudService,
     // public router: Router,
     // private route: ActivatedRoute,
@@ -38,6 +53,17 @@ export class InvoiceDetailComp {
 
   remove( evt ) {
     this.store.dispatch( this.action.remove( this.invoice ) );
+  }
+  openDialog() {
+    let config = new MdDialogConfig();
+    config.viewContainerRef = this.viewContainerRef;
+
+    this.dialogRef = this.dialog.open(AddDialog,config);
+
+    this.dialogRef.afterClosed().subscribe(result =>{
+      console.log('result: '+ result);
+      this.dialogRef = null;
+    });
   }
 
 }

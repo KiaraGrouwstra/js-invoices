@@ -84,7 +84,7 @@ import { PIPE_PROVIDERS } from './lib/pipes';
   exports: [  // feature module, even if not in imports/declarations
     HttpModule,
     FormsModule,
-    ...MATERIAL,
+    //...MATERIAL,
     // Pipes:
     // Directives:
   ],

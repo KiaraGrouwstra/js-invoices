@@ -19,7 +19,7 @@ module.exports = {
 		filename: '[name].js'
 	},
   // devtool: 'eval',
-  // devtool: 'source-map',
+  devtool: 'source-map',
 	module: {
 		loaders: [
 			{ test: /\.ts$/, loader: 'awesome-typescript' },  //‘ts’
@@ -34,7 +34,7 @@ module.exports = {
 	resolve: {
 		extensions: [ // you can now require('file') instead of require('file.coffee')
 			'.js', '.ts', '.json', '.pug', '.css', '.less', '.sass', '.scss', '.html'
-		],
+		]
 		// modulesDirectories: ['node_modules', 'src'],
 		// root: __dirname
 	},

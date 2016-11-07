@@ -1,0 +1,34 @@
+.customer(*ngIf="customer")
+  md-card
+    md-card-title
+        | {{"Add Customers" | translate }}
+    //- md-card-subtitle
+    //-   //- | {{customer.id}}
+    //-   | {{customer.phone}}
+    //- md-divider
+    //- md-card-content
+    //-   p
+    //-     | {{customer.address}}
+    md-divider
+    md-card-content
+          form
+            md-input(
+              placeholder="{{'name' | translate }}"
+              '[(ngModel)]'="customer.name"
+              '[ngModelOptions]'="{standalone: true}"
+            )
+            md-input(
+              placeholder="{{'phone' | translate }}"
+              '[(ngModel)]'="customer.phone"
+              '[ngModelOptions]'="{standalone: true}"
+            )
+            md-input(
+              placeholder="{{'address' | translate }}"
+              '[(ngModel)]'="customer.address"
+              '[ngModelOptions]'="{standalone: true}"
+            )
+    md-divider
+      md-card-actions
+          //- button(md-raised-button, color='accent', [routerLink]="['/customers/' + customer.id + '/edit']") Edit
+          button(md-raised-button [disabled]="isDisabled",(click)="dialogRef.close('no')") {{"Cancel" | translate }}
+          button(md-raised-button color="primary",(click)="dialogRef.close('yes');create($event)") {{"Confirm" | translate }}

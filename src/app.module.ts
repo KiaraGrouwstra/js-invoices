@@ -5,49 +5,54 @@
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 // import {MaterialModule} from '@angular2-material/all/all';
-import { MdCoreModule } from '@angular2-material/core';
-import { MdButtonModule } from '@angular2-material/button';
-import { MdButtonToggleModule } from '@angular2-material/button-toggle';
-import { MdCardModule } from '@angular2-material/card';
-import { MdCheckboxModule } from '@angular2-material/checkbox';
-import { MdGridListModule } from '@angular2-material/grid-list';
-import { MdIconModule, MdIconRegistry } from '@angular2-material/icon';
-import { MdInputModule } from '@angular2-material/input';
-import { MdListModule } from '@angular2-material/list';
-import { MdMenuModule } from '@angular2-material/menu';
-import { MdProgressBarModule } from '@angular2-material/progress-bar';
-import { MdProgressCircleModule } from '@angular2-material/progress-circle';
-import { MdRadioModule } from '@angular2-material/radio';
-import { MdSidenavModule } from '@angular2-material/sidenav';
-import { MdSliderModule } from '@angular2-material/slider';
-import { MdSlideToggleModule } from '@angular2-material/slide-toggle';
-import { MdTabsModule } from '@angular2-material/tabs';
-import { MdToolbarModule } from '@angular2-material/toolbar';
-import { MdTooltipModule } from '@angular2-material/tooltip';
+// import { MdCoreModule } from '@angular2-material/core';
+// import { MdButtonModule } from '@angular2-material/button';
+// import { MdButtonToggleModule } from '@angular2-material/button-toggle';
+// import { MdCardModule } from '@angular2-material/card';
+// import { MdCheckboxModule } from '@angular2-material/checkbox';
+// import { MdGridListModule } from '@angular2-material/grid-list';
+// import { MdIconModule, MdIconRegistry } from '@angular2-material/icon';
+// import { MdInputModule } from '@angular2-material/input';
+// import { MdListModule } from '@angular2-material/list';
+// import { MdMenuModule } from '@angular2-material/menu';
+// import { MdProgressBarModule } from '@angular2-material/progress-bar';
+// import { MdProgressCircleModule } from '@angular2-material/progress-circle';
+// import { MdRadioModule } from '@angular2-material/radio';
+// import { MdSidenavModule } from '@angular2-material/sidenav';
+// import { MdSliderModule } from '@angular2-material/slider';
+// import { MdSlideToggleModule } from '@angular2-material/slide-toggle';
+// import { MdTabsModule } from '@angular2-material/tabs';
+// import { MdToolbarModule } from '@angular2-material/toolbar';
+// import { MdTooltipModule } from '@angular2-material/tooltip';
 // import { MdDialogModule } from '@angular2-material/dialog/dialog';
+import { MaterialModule } from '@angular/material';
+import { AddDialog } from './invoices/invoice-customer-card';
+import { AddDialogs } from './invoice-items/invoice-product-card';
 
-const MATERIAL = [
-  MdCoreModule,
-  MdButtonModule,
-  MdButtonToggleModule,
-  MdCardModule,
-  MdCheckboxModule,
-  MdGridListModule,
-  MdIconModule,
-  MdInputModule,
-  MdListModule,
-  MdMenuModule,
-  MdProgressBarModule,
-  MdProgressCircleModule,
-  MdRadioModule,
-  MdSidenavModule,
-  MdSliderModule,
-  MdSlideToggleModule,
-  MdTabsModule,
-  MdToolbarModule,
-  MdTooltipModule,
-  // MdDialogModule,
-];
+import { CovalentCoreModule } from '@covalent/core';
+
+// const MATERIAL = [
+//   MdCoreModule,
+//   MdButtonModule,
+//   MdButtonToggleModule,
+//   MdCardModule,
+//   MdCheckboxModule,
+//   MdGridListModule,
+//   MdIconModule,
+//   MdInputModule,
+//   MdListModule,
+//   MdMenuModule,
+//   MdProgressBarModule,
+//   MdProgressCircleModule,
+//   MdRadioModule,
+//   MdSidenavModule,
+//   MdSliderModule,
+//   MdSlideToggleModule,
+//   MdTabsModule,
+//   MdToolbarModule,
+//   MdTooltipModule,
+//   // MdDialogModule,
+// ];
 
 //i18n
 
@@ -98,21 +103,29 @@ import actions from './actions';
 import { EffectsModule } from '@ngrx/effects';
 import effects from './effects';
 
+console.warn(TranslateModule.forRoot(),MaterialModule.forRoot(),CovalentCoreModule.forRoot(),0);
+
 @NgModule({
   imports: [
     // HttpModule,
     TranslateModule.forRoot(),
     // FormsModule,
-    MATERIAL,
+    // MATERIAL,
+    MaterialModule.forRoot(),
 
     BrowserModule,
     SharedModule.forRoot(),
     routing,
-    ...effects.map( EffectsModule.run )
+    ...effects.map( EffectsModule.run ),
+
+    CovalentCoreModule.forRoot(),
+
   ],
 
   declarations: [
     App,
+    AddDialog,
+    AddDialogs,
     CustomerDetailComp,
     ProductDetailComp,
     InvoiceDetailComp,
@@ -126,7 +139,13 @@ import effects from './effects';
     InvoiceComp,
     InvoiceItemComp,
   ],
-  providers: [ MdIconRegistry, provideStore(reducers), ...actions ],
+  entryComponents: [
+     AddDialog,
+     AddDialogs,
+   ],
+  providers: [ provideStore(reducers), ...actions ],
+  // providers: [ MdIconRegistry, provideStore(reducers), ...actions ],
+
   bootstrap: [App],
 })
 

@@ -1,8 +1,7 @@
 .product(*ngIf="product")
   md-card
-    a([routerLink]="['/products/' + product.id]")
-      md-card-title
-        | {{product.name}} (# {{product.id}})
+    md-card-title
+        | {{"Add Item" | translate }}
     //- md-card-subtitle
     //-   | ${{product.price}}
     md-divider
@@ -12,14 +11,12 @@
           placeholder="{{'name' | translate }}"
           '[(ngModel)]'="product.name"
           '[ngModelOptions]'="{standalone: true}"
-          '(ngModelChange)'="product_update($event)"
         )
         md-input(
           type="number"
           placeholder="{{'price' | translate }}"
           '[(ngModel)]'="product.price"
           '[ngModelOptions]'="{standalone: true}"
-          '(ngModelChange)'="product_update($event)"
         )
           span(md-prefix) $&nbsp;
     //- md-divider
@@ -29,4 +26,5 @@
     md-divider
     md-card-actions
       //- button(md-raised-button, color='accent', [routerLink]="['/products/' + product.id + '/edit']") Edit
-      button(md-raised-button, color='warn', (click)="product_remove($event)") {{"Delete" | translate }}
+      button(md-raised-button [disabled]="isDisabled",(click)="dialogRef.close('no')") {{"Cancel" | translate }}
+      button(md-raised-button color="primary",(click)="dialogRef.close('yes');create($event)") {{"Confirm" | translate }}
