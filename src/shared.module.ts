@@ -3,27 +3,27 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-// import {MaterialModule} from '@angular2-material/all/all';
-import { MdCoreModule } from '@angular2-material/core';
-import { MdButtonModule } from '@angular2-material/button';
-import { MdButtonToggleModule } from '@angular2-material/button-toggle';
-import { MdCardModule } from '@angular2-material/card';
-import { MdCheckboxModule } from '@angular2-material/checkbox';
-import { MdGridListModule } from '@angular2-material/grid-list';
-import { MdIconModule } from '@angular2-material/icon';
-import { MdInputModule } from '@angular2-material/input';
-import { MdListModule } from '@angular2-material/list';
-import { MdMenuModule } from '@angular2-material/menu';
-import { MdProgressBarModule } from '@angular2-material/progress-bar';
-import { MdProgressCircleModule } from '@angular2-material/progress-circle';
-import { MdRadioModule } from '@angular2-material/radio';
-import { MdSidenavModule } from '@angular2-material/sidenav';
-import { MdSliderModule } from '@angular2-material/slider';
-import { MdSlideToggleModule } from '@angular2-material/slide-toggle';
-import { MdTabsModule } from '@angular2-material/tabs';
-import { MdToolbarModule } from '@angular2-material/toolbar';
-import { MdTooltipModule } from '@angular2-material/tooltip';
-// import { MdDialogModule } from '@angular2-material/dialog/dialog';
+// import {MaterialModule} from '@angular/material/all/all';
+import { MdCoreModule } from '@angular/material/core';
+import { MdButtonModule } from '@angular/material/button';
+import { MdButtonToggleModule } from '@angular/material/button-toggle';
+import { MdCardModule } from '@angular/material/card';
+import { MdCheckboxModule } from '@angular/material/checkbox';
+import { MdGridListModule } from '@angular/material/grid-list';
+import { MdIconModule } from '@angular/material/icon';
+import { MdInputModule } from '@angular/material/input';
+import { MdListModule } from '@angular/material/list';
+import { MdMenuModule } from '@angular/material/menu';
+import { MdProgressBarModule } from '@angular/material/progress-bar';
+import { MdProgressCircleModule } from '@angular/material/progress-circle';
+import { MdRadioModule } from '@angular/material/radio';
+import { MdSidenavModule } from '@angular/material/sidenav';
+import { MdSliderModule } from '@angular/material/slider';
+import { MdSlideToggleModule } from '@angular/material/slide-toggle';
+import { MdTabsModule } from '@angular/material/tabs';
+import { MdToolbarModule } from '@angular/material/toolbar';
+import { MdTooltipModule } from '@angular/material/tooltip';
+// import { MdDialogModule } from '@angular/material/dialog/dialog';
 
 const MATERIAL = [
   MdCoreModule,
