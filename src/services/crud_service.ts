@@ -89,7 +89,8 @@ export class CrudService {
     },
     item: {
       url: (id) => `/api/invoices/${id}/items`,
-      id_url: (id, inv_id) => `/api/invoices/${inv_id}/items/${id}`, cls: InvoiceItem,
+      id_url: (id, inv_id) => `/api/invoices/${inv_id}/items/${id}`,
+      cls: InvoiceItem,
       fact: makeInvoiceItem,
     },
   });

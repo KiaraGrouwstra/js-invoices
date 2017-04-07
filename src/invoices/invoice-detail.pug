@@ -3,13 +3,8 @@
     a([routerLink]="['/invoices/' + invoice.id]")
       md-card-title
         | {{"Invoice" | translate }} # {{invoice.id}}
-    //- md-card-subtitle
-    //-   | Client: {{invoice.customer_id}}
-    md-divider
     md-card-content
-      //- edit:
       form
-        //- input('[(ngModel)]'="invoice.discount")
         md-input(
           type="number"
           placeholder="{{'discount' | translate }}"

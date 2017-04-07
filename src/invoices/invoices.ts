@@ -22,6 +22,7 @@ export class InvoicesComp {
     private store: Store,
     private action: InvoiceActionCreator
   ) {
+    // this.products = store.select('products');
     var prop = ( x ) => ( ctx ) => ctx[x];
     // 关联 invoice_item 到 invoice;
     this.invoices = Rx.Observable.combineLatest(

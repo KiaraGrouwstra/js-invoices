@@ -3,11 +3,6 @@
     a([routerLink]="['/invoices/' + item.invoice_id + '/items/' + item.id]")
       md-card-title
         | {{"Item" | translate}} # {{item.id}}
-    md-card-subtitle
-      | {{"Invoice" | translate}}: # {{item.invoice_id}}
-    //- md-card-subtitle
-    //-   | Product: # {{item.product_id}}
-    md-divider
     md-card-content
       form
         md-input(
@@ -34,8 +29,6 @@
               | add
     md-divider
     md-card-content
-      //- p
-      //-   | Quantity: {{item.quantity}}
       p
         | {{"Revenue" | translate}} : {{item.revenue}}
     md-divider
