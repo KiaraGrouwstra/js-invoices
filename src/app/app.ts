@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { CrudService } from '../services/crud_service';
 
 import { TranslateService } from 'ng2-translate';
-import { En } from '../i18n/en';
-import { Cn } from '../i18n/cn';
+import * as En from '../i18n/en';
+import * as Cn from '../i18n/zh';
 
 @Component({
   selector: 'app',
