@@ -19,28 +19,18 @@ export class InvoiceComp {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(
-      ( params ) => {
-        var id = params['id'] / 1;
-        this.invoice = this.crud.invoices.find(
-                        (i)=>i.id == id
-                        );
-        this.items = this.invoice.items;
-      }
-    );
-  }
-
-  _ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
+      let inv_id = +params['inv_id'];
       let id = +params['id'];
-      this.api.get(id)
+      this.api.get(id, inv_id)
       .then(x => {
-        this.invoice = makeInvoice(x);
+        this.item = makeInvoiceItem(x);
       });
-      this.crud.sub.item.index(id)
-      .then(x => {
-        this.items = x;
-      });
+      // this.crud.sub.item.index(id)
+      // .then(x => {
+      //   this.items = x;
+      // });
+      this.items = this.invoice.items;
     });
   }
 

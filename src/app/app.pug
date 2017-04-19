@@ -3,11 +3,11 @@ md-toolbar([color]="primary")
     | {{"Invoice App" | translate }}
     | &nbsp;
   button(md-button [routerLink]="['./products']")
-    | {{"Products" | translate }}
+    | {{tr.products}}
   button(md-button [routerLink]="['./customers']")
-    | {{"Customers" | translate }}
+    | {{tr.customers}}
   button(md-button [routerLink]="['./invoices']")
-    | {{"Invoices" | translate }}
+    | {{tr.invoices}}
 
 .content
   router-outlet

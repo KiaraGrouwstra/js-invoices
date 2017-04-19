@@ -22,9 +22,7 @@
     "core-js": "^2.4.1",
     "es6-shim": "^0.35.1",
     "express": "~4.13.4",
-    "lodash": "^4.15.0",
     "ng2-translate": "^4.0.0",
-    "normalize.css": "^4.2.0",
     "ramda": "^0.22.1",
     "reflect-metadata": "^0.1.8",
     "rxjs": "^5.0.0-beta.11",
@@ -33,21 +31,13 @@
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
-    "css-loader": "^0.23.1",
-    "file-loader": "^0.8.5",
-    "html-loader": "^0.4.3",
-    "less-loader": "^2.2.3",
     "pug": "^2.0.0-beta5",
     "pug-html-loader": "^1.0.8",
     "requirejs": "^2.2.0",
     "systemjs": "^0.19.36",
     "webpack": "^2.1.0-beta.20",
-    "style-loader": "^0.13.1",
-    "ts-loader": "^0.8.2",
     "typescript": "^2.0.0-beta",
     "typescript-register": "^1.1.0",
     "typescript-require": "^0.2.9",
-    "webpack-dev-middleware": "^1.6.1",
-    "awesome-typescript-loader": "1.1.1"
   }
 }
